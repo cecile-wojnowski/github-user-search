@@ -1,29 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import { GithubSearchContext } from "contexts/github-search-context";
+import fetchData from "functions/fetchData";
 
 import Header from "components/Header";
-import Box from "components/Containers/Box";
+import UsersList from "views/GithubSearch/UsersList";
+
+import Checkbox from "components/Inputs/Checkbox";
 import SearchInput from "components/Inputs/SearchInput";
-import Card from "components/Card";
+import Typography from "components/Typography";
 
 export default function GithubSearch() {
-  const [inputValue, setInputValue] = useState("tom");
+  const [inputValue, setInputValue] = useState("");
   const [users, setUsers] = useState([]);
 
+  // @ts-ignore
+  const { state } = useContext(GithubSearchContext);
+
+  // TODO : handle the message of the empty page at the beginning
+  // and the results of the empty field when input value is erased
+
   useEffect(() => {
-    fetch(`https://api.github.com/search/users?q=${inputValue}`)
-      .then((response) => response.json())
-      .then((data) => setUsers(data.items));
+    if (inputValue) {
+      fetchData(
+        `https://api.github.com/search/users?q=${inputValue}`,
+        "GET"
+      ).then((data) => setUsers(data.items));
+    }
   }, [inputValue]);
 
   return (
     <>
       <Header />
-      <SearchInput setInputValue={setInputValue} />
-      <Box grid center>
-        {users.map((user: any) => (
-          <Card user={user} />
-        ))}
-      </Box>
+      <Checkbox />
+      <Typography content={`${state.selectedCards} elements selected`} />
+      <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
+      <UsersList data={users} />
     </>
   );
 }

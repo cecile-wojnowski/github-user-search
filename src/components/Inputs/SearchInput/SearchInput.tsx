@@ -1,20 +1,23 @@
 import React from "react";
 
+import style from "components/Inputs/SearchInput/style";
 import Box from "components/Containers/Box";
 
-const style = {
-  backgroundColor: "lightgrey",
-  border: "none",
-  borderRadius: "8px",
-  height: "2.5rem",
-  padding: "1%",
-  width: "30%",
-  fontSize: "20px",
-};
-export default function SearchInput({ setInputValue }: any) {
+export default function SearchInput({ inputValue, setInputValue }: any) {
+  function handleChange(event: any) {
+    setInputValue(event.target.value);
+  }
   return (
-    <Box justifyContent="center">
-      <input style={style} type="text" />
-    </Box>
+    <form>
+      <Box justifyContent="center">
+        <input
+          value={inputValue}
+          onChange={handleChange}
+          style={style}
+          type="text"
+          placeholder="Search users"
+        />
+      </Box>
+    </form>
   );
 }

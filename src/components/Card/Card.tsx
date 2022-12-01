@@ -13,7 +13,6 @@ import Button from "components/Buttons/Button";
  */
 
 export default function Card({ user }: any) {
-  console.log("user", user);
   // 100px seems to be too small
   return (
     <Box width="150px" flexDirection="column" boxShadow borderRadius>
