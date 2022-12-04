@@ -10,7 +10,9 @@ export default function UsersList({ users }: any) {
   return (
     <Box grid center>
       {hasLength(users) ? (
-        users.map((user: any) => <Card user={user} />)
+        users.map((user: any, index: number) => (
+          <Card key={index} user={user} />
+        ))
       ) : (
         <Typography content="No user found" />
       )}

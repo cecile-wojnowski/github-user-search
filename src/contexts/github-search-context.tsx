@@ -17,15 +17,33 @@ function reducer(state: any, action: any) {
     case "addChecked":
       return { ...state, usersChecked: action.payload };
 
+    case "removeChecked":
+      const removedChecked = state.usersChecked.filter(
+        // @ts-ignore
+        (id, i) =>
+          // @ts-ignore
+          state.usersChecked.findLastIndex((x) => x === id) === i
+      );
+
+      return { ...state, usersChecked: removedChecked };
+
     case "duplicate":
-      return {};
+      const duplicatedUsers = state.usersChecked?.map((element: any) => {
+        const user = state?.users.filter((user: any) => element === user.id);
+        return user[0];
+      });
+
+      return {
+        ...state,
+        users: [...state.users, ...duplicatedUsers],
+      };
 
     case "delete":
-      const removedUsersChecked = state.users?.filter(
+      const removedUsers = state.users?.filter(
         (user: any) => !state.usersChecked.includes(user.id)
       );
 
-      return { ...state, users: removedUsersChecked, usersChecked: [] };
+      return { ...state, users: removedUsers, usersChecked: [] };
 
     default:
       throw new Error();

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 
 import { GithubSearchContext } from "contexts/github-search-context";
 import fetchData from "functions/fetchData";
+import { actions } from "constants/constants";
+import { routes } from "constants/routes";
 
 import Header from "components/Header";
 import UsersList from "views/GithubSearch/UsersList";
@@ -26,7 +28,7 @@ export default function GithubSearch() {
   useEffect(() => {
     if (inputValue) {
       fetchData(
-        `https://api.github.com/search/users?q=${inputValue}in:login&type=Users`,
+        `${routes.GITHUB_USERS_SEARCH}${inputValue}${routes.GITHUB_USERS_SEARCH_PARAMS}`,
         "GET"
       ).then((data) => {
         console.log("data", data);
@@ -38,10 +40,6 @@ export default function GithubSearch() {
       });
     }
   }, [inputValue, dispatch]);
-
-  const actions = ["delete", "duplicate"];
-
-  console.log("state", state);
 
   return (
     <>
