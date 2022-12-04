@@ -4,5 +4,5 @@
  * @returns Returns a boolean
  */
 export default function hasLength(array: any[]) {
-  return array.length > 0 ? true : false;
+  return array?.length > 0 && array !== undefined ? true : false;
 }

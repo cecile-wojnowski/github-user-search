@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+
+import { GithubSearchContext } from "contexts/github-search-context";
 
 import Box from "components/Containers/Box";
 import Typography from "components/Typography";
@@ -13,10 +15,13 @@ import Button from "components/Buttons/Button";
  */
 
 export default function Card({ user }: any) {
+  // @ts-ignore
+  const { canEdit } = useContext(GithubSearchContext);
+
   // 100px seems to be too small
   return (
     <Box width="150px" flexDirection="column" boxShadow borderRadius>
-      <Checkbox />
+      {canEdit ? <Checkbox userId={user.id} /> : null}
       <Avatar imageUrl={user?.avatar_url} />
       <Typography content={user?.id} />
       <Typography content={user?.login} />

@@ -1,22 +1,34 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import { GithubSearchContext } from "contexts/github-search-context";
 
-export default function Checkbox() {
+export default function Checkbox({ userId }: any) {
   const [checked, setChecked] = useState(false);
 
   // @ts-ignore
-  const { dispatch } = useContext(GithubSearchContext);
+  const { state, dispatch } = useContext(GithubSearchContext);
 
   const handleChange = () => {
+    if (!checked) {
+      dispatch({ type: "increment" });
+      dispatch({
+        type: "addChecked",
+        payload: [...state.usersChecked, userId],
+      });
+    } else if (state.selectedCards !== 0 && checked) {
+      dispatch({ type: "decrement" });
+    }
+
     setChecked(!checked);
   };
 
   useEffect(() => {
-    if (checked) {
-      dispatch({ type: "increment" });
+    if (state.usersChecked.includes(userId)) {
+      setChecked(true);
+    } else {
+      setChecked(false);
     }
-  }, [checked, dispatch]);
+  }, [state.usersChecked, userId]);
 
   return <input type="checkbox" checked={checked} onChange={handleChange} />;
 }

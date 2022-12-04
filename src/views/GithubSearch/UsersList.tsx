@@ -6,11 +6,11 @@ import Box from "components/Containers/Box";
 import Card from "components/Card";
 import Typography from "components/Typography";
 
-export default function UsersList({ data, countUsers }: any) {
+export default function UsersList({ users }: any) {
   return (
     <Box grid center>
-      {hasLength(data) ? (
-        data.map((user: any) => <Card user={user} countUsers={countUsers} />)
+      {hasLength(users) ? (
+        users.map((user: any) => <Card user={user} />)
       ) : (
         <Typography content="No user found" />
       )}

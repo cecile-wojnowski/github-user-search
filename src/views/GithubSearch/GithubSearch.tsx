@@ -10,12 +10,15 @@ import Checkbox from "components/Inputs/Checkbox";
 import SearchInput from "components/Inputs/SearchInput";
 import Typography from "components/Typography";
 
+import Actions from "components/Actions";
+
 export default function GithubSearch() {
   const [inputValue, setInputValue] = useState("");
-  const [users, setUsers] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // @ts-ignore
-  const { state } = useContext(GithubSearchContext);
+  const { state, dispatch, canEdit, setCanEdit } =
+    useContext(GithubSearchContext);
 
   // TODO : handle the message of the empty page at the beginning
   // and the results of the empty field when input value is erased
@@ -23,19 +26,38 @@ export default function GithubSearch() {
   useEffect(() => {
     if (inputValue) {
       fetchData(
-        `https://api.github.com/search/users?q=${inputValue}`,
+        `https://api.github.com/search/users?q=${inputValue}in:login&type=Users`,
         "GET"
-      ).then((data) => setUsers(data.items));
+      ).then((data) => {
+        console.log("data", data);
+        if (data.hasOwnProperty("message")) {
+          setErrorMessage(data.message);
+        } else {
+          dispatch({ type: "add", payload: data.items });
+        }
+      });
     }
-  }, [inputValue]);
+  }, [inputValue, dispatch]);
+
+  const actions = ["delete", "duplicate"];
+
+  console.log("state", state);
 
   return (
     <>
       <Header />
-      <Checkbox />
-      <Typography content={`${state.selectedCards} elements selected`} />
+
+      <p>{canEdit ? "Edit mode" : "Read Only"}</p>
+      <button onClick={() => setCanEdit(!canEdit)}>Edit</button>
+      {canEdit ? (
+        <>
+          <Checkbox />
+          <Typography content={`${state.selectedCards} elements selected`} />
+        </>
+      ) : null}
       <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
-      <UsersList data={users} />
+      <Actions icons={actions} />
+      {!errorMessage ? <UsersList users={state.users} /> : errorMessage}
     </>
   );
 }
