@@ -2,7 +2,12 @@ import React, { createContext, useState, useReducer } from "react";
 
 export const GithubSearchContext = createContext("");
 
-const initialState = { selectedCards: 0, users: [], usersChecked: [] };
+const initialState = {
+  selectedCards: 0,
+  users: [],
+  usersChecked: [],
+  allChecked: null,
+};
 
 function reducer(state: any, action: any) {
   switch (action.type) {
@@ -20,12 +25,13 @@ function reducer(state: any, action: any) {
     case "removeChecked":
       const removedChecked = state.usersChecked.filter(
         // @ts-ignore
-        (id, i) =>
-          // @ts-ignore
-          state.usersChecked.findLastIndex((x) => x === id) === i
+        (id: any) => id !== action.payload
       );
 
-      return { ...state, usersChecked: removedChecked };
+      return {
+        ...state,
+        usersChecked: removedChecked,
+      };
 
     case "duplicate":
       const duplicatedUsers = state.usersChecked?.map((element: any) => {
@@ -42,8 +48,15 @@ function reducer(state: any, action: any) {
       const removedUsers = state.users?.filter(
         (user: any) => !state.usersChecked.includes(user.id)
       );
+      return {
+        ...state,
+        users: removedUsers,
+        usersChecked: [],
+        selectedCards: 0,
+      };
 
-      return { ...state, users: removedUsers, usersChecked: [] };
+    case "checkAll":
+      return { ...state, allChecked: !state.allChecked };
 
     default:
       throw new Error();

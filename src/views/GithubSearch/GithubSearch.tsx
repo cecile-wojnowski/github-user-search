@@ -49,7 +49,7 @@ export default function GithubSearch() {
       <button onClick={() => setCanEdit(!canEdit)}>Edit</button>
       {canEdit ? (
         <>
-          <Checkbox />
+          <Checkbox onClick={() => dispatch({ type: "checkAll" })} />
           <Typography content={`${state.selectedCards} elements selected`} />
         </>
       ) : null}
