@@ -1,12 +1,11 @@
 import React from "react";
 import Typography from "components/Typography";
 
-// Create a common type ?
-type ButtonProps = { content: string };
+import { ButtonProps } from "./Button.type";
 
-export default function Button({ content }: ButtonProps) {
+export default function Button({ onClick, content }: ButtonProps) {
   return (
-    <button>
+    <button onClick={onClick}>
       <Typography content={content} />
     </button>
   );

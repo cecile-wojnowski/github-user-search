@@ -28,14 +28,14 @@ export default function Checkbox({ onClick, userId }: any) {
   };
 
   useEffect(() => {
-    if (state.allChecked) {
+    if (state?.allChecked) {
       setChecked(true);
-    } else if (state.allChecked === false) {
+    } else if (state?.allChecked === false) {
       setChecked(false);
-    } else if (!state.usersChecked.includes(userId)) {
+    } else if (!state?.usersChecked.includes(userId)) {
       setChecked(false);
     }
-  }, [checked, state.usersChecked, state.allChecked, userId]);
+  }, [checked, state?.usersChecked, state?.allChecked, userId]);
 
   return (
     <input
