@@ -3,16 +3,21 @@ import React from "react";
 import Box from "components/Containers/Box";
 import Typography from "components/Typography";
 
-// Use something else than style
-export default function Header() {
+type HeaderProps = {
+  content: string;
+};
+
+export default function Header({ content }: HeaderProps) {
   return (
-    <Box
-      backgroundColor="grey"
-      justifyContent="center"
-      height="64px"
-      marginBottom="3%"
-    >
-      <Typography fontWeight="bold" content="Github search" />
-    </Box>
+    <header>
+      <Box
+        backgroundColor="grey"
+        justifyContent="center"
+        height="64px"
+        marginBottom="3%"
+      >
+        <Typography fontWeight="bold" content={content} />
+      </Box>
+    </header>
   );
 }
