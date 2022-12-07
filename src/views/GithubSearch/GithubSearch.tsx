@@ -6,11 +6,10 @@ import { actions } from "constants/constants";
 import { routes } from "constants/routes";
 
 import Header from "components/Header";
+import Container from "components/Containers/Container";
 import UsersList from "views/GithubSearch/UsersList";
-
-import Checkbox from "components/Inputs/Checkbox";
+import SelectedElements from "./SelectedElements";
 import SearchInput from "components/Inputs/SearchInput";
-import Typography from "components/Typography";
 
 import Actions from "components/Actions";
 
@@ -43,19 +42,16 @@ export default function GithubSearch() {
 
   return (
     <>
-      <Header />
+      <Header content="Github search" />
+      <Container>
+        <p>{canEdit ? "Edit mode" : "Read Only"}</p>
+        <button onClick={() => setCanEdit(!canEdit)}>Edit</button>
+        {canEdit ? <SelectedElements /> : null}
+        <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
+        {canEdit ? <Actions icons={actions} /> : null}
 
-      <p>{canEdit ? "Edit mode" : "Read Only"}</p>
-      <button onClick={() => setCanEdit(!canEdit)}>Edit</button>
-      {canEdit ? (
-        <>
-          <Checkbox onClick={() => dispatch({ type: "checkAll" })} />
-          <Typography content={`${state.selectedCards} elements selected`} />
-        </>
-      ) : null}
-      <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
-      <Actions icons={actions} />
-      {!errorMessage ? <UsersList users={state.users} /> : errorMessage}
+        {!errorMessage ? <UsersList users={state.users} /> : errorMessage}
+      </Container>
     </>
   );
 }

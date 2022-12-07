@@ -21,6 +21,7 @@ export default function Box({
 }: any) {
   return (
     <div
+      data-testid="Box"
       style={{
         display: grid ? "grid" : "flex",
         flexDirection: flexDirection,
@@ -31,7 +32,6 @@ export default function Box({
         marginBottom: marginBottom,
         boxShadow: boxShadow ? "10px 5px 5px black" : "none",
         borderRadius: borderRadius ? "8px" : "O",
-
         gridTemplateColumns: grid && "200px 200px 200px 200px",
         gridTemplateRows: grid && "300px 300px 300px 300px",
         columnGap: grid && "10px",

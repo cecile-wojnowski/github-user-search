@@ -7,5 +7,5 @@ import React from "react";
  * @returns {JSX} All the page content with default style
  */
 export default function Container({ children }: any) {
-  return <div>{children}</div>;
+  return <div style={{ margin: 30 }}>{children}</div>;
 }

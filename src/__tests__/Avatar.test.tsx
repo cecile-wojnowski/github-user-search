@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, cleanup } from "@testing-library/react";
 
 import Avatar from "components/Avatar";
-import { user } from "assets/images";
 
 afterEach(cleanup);
 
