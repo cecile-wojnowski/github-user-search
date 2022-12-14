@@ -18,6 +18,10 @@ export default function Card({ user }: any) {
   // @ts-ignore
   const { canEdit } = useContext(GithubSearchContext);
 
+  function handleClick() {
+    window.location.href = user.html_url;
+  }
+
   // 100px seems to be too small
   return (
     <Box width="150px" flexDirection="column" boxShadow borderRadius>
@@ -25,7 +29,7 @@ export default function Card({ user }: any) {
       <Avatar imageUrl={user?.avatar_url} />
       <Typography content={user?.id} />
       <Typography content={user?.login} />
-      <Button content="View profile" />
+      <Button onClick={handleClick} content="View profile" />
     </Box>
   );
 }

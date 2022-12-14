@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 
+// import Box from "components/Containers/Box";
+import "./style.css";
+
 import { GithubSearchContext } from "contexts/github-search-context";
 
 export default function Checkbox({ onClick, userId }: any) {
@@ -38,10 +41,13 @@ export default function Checkbox({ onClick, userId }: any) {
   }, [checked, state?.usersChecked, state?.allChecked, userId]);
 
   return (
-    <input
-      type="checkbox"
-      checked={checked}
-      onChange={onClick ? onClick : handleChange}
-    />
+    <div className="checkbox-wrapper">
+      <input
+        className={checked ? "checked" : ""}
+        type="checkbox"
+        checked={checked}
+        onChange={onClick ? onClick : handleChange}
+      />
+    </div>
   );
 }
