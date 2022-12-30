@@ -18,11 +18,11 @@ import Typography from "components/Typography";
 import Actions from "components/Actions";
 
 export default function GithubSearch() {
-  const [inputValue, setInputValue] = useState(null);
   const [url, setUrl] = useState("");
 
   // @ts-ignore
-  const { state, canEdit, dispatch } = useContext(GithubSearchContext);
+  const { state, canEdit, dispatch, inputValue, setInputValue } =
+    useContext(GithubSearchContext);
   const hasNoResult = !hasLength(state.users) && inputValue;
 
   useEffect(() => {
