@@ -9,7 +9,7 @@ export default function SearchInput({ inputValue, setInputValue }: any) {
   }
   return (
     <form>
-      <Box justifyContent="center">
+      <Box style={{ justifyContent: "center" }}>
         <input
           value={inputValue}
           onChange={handleChange}

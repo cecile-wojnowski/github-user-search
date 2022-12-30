@@ -9,33 +9,20 @@ import React from "react";
  */
 export default function Box({
   children,
-  flexDirection,
-  justifyContent,
-  width,
-  height,
-  backgroundColor,
   marginBottom,
   boxShadow,
   borderRadius,
-  grid,
+  style,
 }: any) {
   return (
     <div
       data-testid="Box"
       style={{
-        display: grid ? "grid" : "flex",
-        flexDirection: flexDirection,
-        width: width,
-        height: height,
-        justifyContent: justifyContent,
-        backgroundColor: backgroundColor,
+        ...style,
+        display: "flex",
         marginBottom: marginBottom,
-        boxShadow: boxShadow ? "10px 5px 5px black" : "none",
+        boxShadow: boxShadow ? "3px 3px 5px grey" : "none", // TODO : must be stored inside a theme
         borderRadius: borderRadius ? "8px" : "O",
-        gridTemplateColumns: grid && "200px 200px 200px 200px",
-        gridTemplateRows: grid && "300px 300px 300px 300px",
-        columnGap: grid && "10px",
-        rowGap: grid && "15px",
       }}
     >
       {children}

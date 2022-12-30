@@ -8,14 +8,15 @@ type HeaderProps = {
 };
 
 export default function Header({ content }: HeaderProps) {
+  const style = {
+    backgroundColor: "grey", // TODO : store color in the same file
+    justifyContent: "center",
+    height: "64px",
+    marginBottom: "3%",
+  };
   return (
     <header>
-      <Box
-        backgroundColor="grey"
-        justifyContent="center"
-        height="64px"
-        marginBottom="3%"
-      >
+      <Box style={style}>
         <Typography fontWeight="bold" content={content} />
       </Box>
     </header>

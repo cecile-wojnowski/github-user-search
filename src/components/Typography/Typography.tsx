@@ -6,9 +6,6 @@ type TypographyProps = {
   fontWeight?: "regular" | "bold";
 };
 
-export default function Typography({
-  content,
-  fontWeight = "regular",
-}: TypographyProps) {
-  return <p style={{ fontWeight: fontWeight }}>{content}</p>;
+export default function Typography({ content, style }: TypographyProps) {
+  return <p style={{ ...style }}>{content}</p>;
 }
