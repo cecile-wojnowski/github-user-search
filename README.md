@@ -10,7 +10,7 @@ No form or submit button is used, the results are shown every time the input val
 ### `No external library`
 
 Except for creating the React project and for testing purpose, no external library is intended to be used. 
-So we have developped simple components such as Typography and Button, and the CSS is wrapped inside javascript objects in order to be passed through the React attribut "style".
+So we have developped simple components such as Typography and Button, and the CSS is wrapped inside javascript objects in order to be passed through the React attribute "style".
 
 ### `TypeScript`
 
