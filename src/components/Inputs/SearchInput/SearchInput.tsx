@@ -8,16 +8,14 @@ export default function SearchInput({ inputValue, setInputValue }: any) {
     setInputValue(event.target.value);
   }
   return (
-    <form>
-      <Box style={{ justifyContent: "center", marginBottom: "2%" }}>
-        <input
-          value={inputValue}
-          onChange={handleChange}
-          style={style}
-          type="text"
-          placeholder="Search users"
-        />
-      </Box>
-    </form>
+    <Box style={{ justifyContent: "center", marginBottom: "2%" }}>
+      <input
+        value={inputValue ? inputValue : ""}
+        onChange={handleChange}
+        style={style}
+        type="text"
+        placeholder="Search users"
+      />
+    </Box>
   );
 }

@@ -1,7 +1,7 @@
 const style = {
   maxWidth: "100%",
   height: "320px",
-  overflowY: "scroll",
+  overflowY: "auto",
   overflowX: "clip",
   flexWrap: "wrap",
   justifyContent: "space-evenly",

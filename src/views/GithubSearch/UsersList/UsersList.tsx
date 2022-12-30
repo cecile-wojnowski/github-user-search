@@ -5,18 +5,20 @@ import hasLength from "functions/hasLength";
 
 import Box from "components/Containers/Box";
 import Card from "components/Card";
-import Typography from "components/Typography";
 
+/**
+ * A scrollable container with the list of cards users
+ * @param {Object} users Array of users with their infos
+ * @returns
+ */
 export default function UsersList({ users }: any) {
   return (
     <Box style={style}>
-      {hasLength(users) ? (
-        users.map((user: any, index: number) => (
-          <Card key={index} user={user} />
-        ))
-      ) : (
-        <Typography content="No user found" />
-      )}
+      {hasLength(users) // Make sure to not map on an empty array
+        ? users.map((user: any, index: number) => (
+            <Card key={index} user={user} />
+          ))
+        : null}
     </Box>
   );
 }
