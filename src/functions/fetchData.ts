@@ -8,10 +8,7 @@ export default async function fetchData(url: string, method: string) {
   let data;
   const response = await fetch(url, { method: method });
   if (!response.ok) {
-    console.log("response", response);
-    console.log(response.status, response.statusText);
     const error = await response.json();
-    console.log("data", data);
 
     if (response.status === 403) {
       data = error;
