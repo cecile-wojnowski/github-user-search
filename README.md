@@ -18,7 +18,7 @@ Our components are typed with TypeScript in separate files.
 
 ### `Tests`
 
-React Testing Library is used for unit tests.
+Jest and React Testing Library are used for unit tests.
 
 
 ### `Documentation`
