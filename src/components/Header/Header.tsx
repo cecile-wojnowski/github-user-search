@@ -17,7 +17,7 @@ export default function Header({ content }: HeaderProps) {
   return (
     <header>
       <Box style={style}>
-        <Typography fontWeight="bold" content={content} />
+        <Typography style={{ fontWeight: "bold" }} content={content} />
       </Box>
     </header>
   );

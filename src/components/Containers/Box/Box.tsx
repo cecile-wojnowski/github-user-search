@@ -7,20 +7,13 @@ import React from "react";
  * @param {string} justifyContent
  * @returns {JSX} Any content with a specific layout
  */
-export default function Box({
-  children,
-  marginBottom,
-  boxShadow,
-  borderRadius,
-  style,
-}: any) {
+export default function Box({ children, boxShadow, borderRadius, style }: any) {
   return (
     <div
       data-testid="Box"
       style={{
         ...style,
         display: "flex",
-        marginBottom: marginBottom,
         boxShadow: boxShadow ? "3px 3px 5px grey" : "none", // TODO : must be stored inside a theme
         borderRadius: borderRadius ? "8px" : "O",
       }}

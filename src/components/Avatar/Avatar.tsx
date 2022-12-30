@@ -1,11 +1,20 @@
 import React from "react";
 
-export default function Avatar({ imageUrl }: any) {
+/**
+ *
+ * @param {string} imageUrl
+ * @param {Object} style
+ * @returns {JSX} Image with default value
+ */
+export default function Avatar({ imageUrl, style }: any) {
   const defaultUserImage = require("assets/images/user.png");
 
   return (
     <img
-      style={{ borderRadius: "50%", width: "50%" }}
+      style={{
+        borderRadius: "50%",
+        ...style,
+      }}
       src={imageUrl ? imageUrl : defaultUserImage}
       alt={imageUrl ? "avatar" : "default"}
     />

@@ -5,11 +5,13 @@ import useFetch from "hooks/useFetch";
 import { actions } from "constants/constants";
 import { routes } from "constants/routes";
 
+import Box from "components/Containers/Box";
 import Header from "components/Header";
 import Container from "components/Containers/Container";
-import UsersList from "views/GithubSearch/UsersList";
-import SelectedElements from "./SelectedElements";
+import UsersList from "views/GithubSearch/UsersList/UsersList";
+import SelectedElements from "views/GithubSearch/SelectedElements/SelectedElements";
 import SearchInput from "components/Inputs/SearchInput";
+import EditButton from "views/GithubSearch/EditButton";
 
 import Actions from "components/Actions";
 
@@ -18,7 +20,7 @@ export default function GithubSearch() {
   const [url, setUrl] = useState("");
 
   // @ts-ignore
-  const { state, canEdit, setCanEdit } = useContext(GithubSearchContext);
+  const { state, canEdit } = useContext(GithubSearchContext);
 
   // TODO : handle the message of the empty page at the beginning
   // and the results of the empty field when input value is erased
@@ -36,11 +38,15 @@ export default function GithubSearch() {
     <>
       <Header content="Github search" />
       <Container>
-        <p>{canEdit ? "Edit mode" : "Read Only"}</p>
-        <button onClick={() => setCanEdit(!canEdit)}>Edit</button>
-        {canEdit ? <SelectedElements /> : null}
+        <EditButton />
         <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
-        {canEdit ? <Actions icons={actions} /> : null}
+        {canEdit ? (
+          <Box
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <SelectedElements /> <Actions icons={actions} />
+          </Box>
+        ) : null}
 
         {isLoading ? (
           <p>Loading...</p>

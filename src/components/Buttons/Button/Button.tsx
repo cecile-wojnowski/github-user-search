@@ -18,7 +18,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button onClick={onClick} style={{ ...style }}>
-      <Typography content={content} style={{ fontWeight: 500 }} />
+      <Typography content={content} style={{ fontWeight: 550 }} />
     </button>
   );
 }

@@ -1,1 +1,1 @@
-export const actions = ["delete", "duplicate"];
+export const actions = ["duplicate", "delete"];

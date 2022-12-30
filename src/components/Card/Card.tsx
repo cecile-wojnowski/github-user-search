@@ -21,7 +21,9 @@ export default function Card({ user }: any) {
     height: "fit-content",
     flexDirection: "column",
     backgroundColor: "lightgrey", // TODO : use theme
-    padding: "2%",
+    paddingBlock: "1% 3%",
+    paddingInline: "2%",
+    marginBottom: "1%",
   };
 
   const userInfos = user ? [user?.id, user?.login] : [];
