@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 
-// import Box from "components/Containers/Box";
 import "./style.css";
 
 import { GithubSearchContext } from "contexts/github-search-context";
@@ -13,32 +12,28 @@ export default function Checkbox({ onClick, userId }: any) {
 
   const handleChange = () => {
     if (!checked) {
-      dispatch({ type: "increment" });
       dispatch({
         type: "addChecked",
         payload: [...state.usersChecked, userId],
       });
     } else if (state.selectedCards !== 0 && checked) {
-      dispatch({ type: "decrement" });
       dispatch({
         type: "removeChecked",
         payload: userId,
       });
-      setChecked(false);
     }
 
     setChecked(!checked);
   };
 
   useEffect(() => {
-    if (state?.allChecked) {
+    if (state.allChecked) {
       setChecked(true);
-    } else if (state?.allChecked === false) {
-      setChecked(false);
-    } else if (!state?.usersChecked.includes(userId)) {
+    } else if (state.allChecked === false) {
+      // allChecked is false only when the selected All button is used
       setChecked(false);
     }
-  }, [checked, state?.usersChecked, state?.allChecked, userId]);
+  }, [state.allChecked]);
 
   return (
     <div className="checkbox-wrapper">

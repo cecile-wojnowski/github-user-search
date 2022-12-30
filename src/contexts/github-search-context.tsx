@@ -11,26 +11,25 @@ const initialState = {
 
 function reducer(state: any, action: any) {
   switch (action.type) {
-    case "increment":
-      return { ...state, selectedCards: state.selectedCards + 1 };
-    case "decrement":
-      return { ...state, selectedCards: state.selectedCards - 1 };
-
     case "add":
+      // Used to store the fetched data
       return { ...state, users: action.payload };
 
     case "addChecked":
-      return { ...state, usersChecked: action.payload };
+      return {
+        ...state,
+        selectedCards: state.selectedCards + 1,
+        usersChecked: action.payload,
+      };
 
     case "removeChecked":
       const removedChecked = state.usersChecked.filter(
-        // @ts-ignore
-        (id: any) => id !== action.payload
+        (id: number) => id !== action.payload
       );
-
       return {
         ...state,
         usersChecked: removedChecked,
+        selectedCards: state.selectedCards - 1,
       };
 
     case "duplicate":
@@ -48,6 +47,7 @@ function reducer(state: any, action: any) {
       const removedUsers = state.users?.filter(
         (user: any) => !state.usersChecked.includes(user.id)
       );
+
       return {
         ...state,
         users: removedUsers,
@@ -56,7 +56,11 @@ function reducer(state: any, action: any) {
       };
 
     case "checkAll":
-      return { ...state, allChecked: !state.allChecked };
+      return {
+        ...state,
+        selectedCards: !state.allChecked ? state.users.length : 0,
+        allChecked: !state.allChecked,
+      };
 
     default:
       throw new Error();
