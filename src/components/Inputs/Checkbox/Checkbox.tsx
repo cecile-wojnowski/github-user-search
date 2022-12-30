@@ -14,13 +14,15 @@ export default function Checkbox({ onClick, userId }: any) {
     if (!checked) {
       dispatch({
         type: "addChecked",
-        payload: [...state.usersChecked, userId],
+        payload: userId,
       });
     } else if (state.selectedCards !== 0 && checked) {
       dispatch({
         type: "removeChecked",
         payload: userId,
       });
+    } else if (!state.usersChecked.includes(userId)) {
+      setChecked(false);
     }
 
     setChecked(!checked);
@@ -30,7 +32,6 @@ export default function Checkbox({ onClick, userId }: any) {
     if (state.allChecked) {
       setChecked(true);
     } else if (state.allChecked === false) {
-      // allChecked is false only when the selected All button is used
       setChecked(false);
     }
   }, [state.allChecked]);

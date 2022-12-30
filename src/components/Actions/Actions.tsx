@@ -10,14 +10,17 @@ type ActionsProps = {
 };
 export default function Actions({ icons }: ActionsProps) {
   // @ts-ignore
-  const { dispatch } = useContext(GithubSearchContext);
+  const { dispatch, setInputValue } = useContext(GithubSearchContext);
 
   return (
     <Box>
       {icons?.map((icon: string, index: number) => (
         <IconButton
           key={index}
-          onClick={() => dispatch({ type: icon })}
+          onClick={() => {
+            if (icon === "delete") setInputValue("");
+            dispatch({ type: icon });
+          }}
           icon={icon}
         />
       ))}

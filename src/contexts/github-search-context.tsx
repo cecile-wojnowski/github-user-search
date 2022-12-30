@@ -19,7 +19,7 @@ function reducer(state: any, action: any) {
       return {
         ...state,
         selectedCards: state.selectedCards + 1,
-        usersChecked: action.payload,
+        usersChecked: [...state.usersChecked, action.payload],
       };
 
     case "removeChecked":
@@ -54,13 +54,17 @@ function reducer(state: any, action: any) {
         users: removedUsers,
         usersChecked: [],
         selectedCards: 0,
+        allChecked: false,
       };
 
     case "checkAll":
+      const usersId = state.users.map((user: any) => user.id);
+
       return {
         ...state,
         selectedCards: !state.allChecked ? state.users.length : 0,
         allChecked: !state.allChecked,
+        usersChecked: !state.allChecked ? usersId : [],
       };
 
     case "reset": {
@@ -76,11 +80,19 @@ function reducer(state: any, action: any) {
 export default function GithubSearchProvider({ children }: any) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [canEdit, setCanEdit] = useState(true);
+  const [inputValue, setInputValue] = useState(null);
 
   return (
     <GithubSearchContext.Provider
       // @ts-ignore
-      value={{ state, dispatch, canEdit, setCanEdit }}
+      value={{
+        state,
+        dispatch,
+        canEdit,
+        setCanEdit,
+        inputValue,
+        setInputValue,
+      }}
     >
       {children}
     </GithubSearchContext.Provider>
