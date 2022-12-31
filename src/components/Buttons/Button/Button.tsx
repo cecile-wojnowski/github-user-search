@@ -1,16 +1,8 @@
 import React from "react";
 import Typography from "components/Typography";
 
-import theme from "styles/theme";
+import { style as defaultStyle } from "./style";
 import { ButtonProps } from "./Button.type";
-
-// TODO : use theme
-const defaultStyle = {
-  backgroundColor: theme.colors.lightblue,
-  borderRadius: "8px",
-  border: "none",
-  cursor: "pointer",
-};
 
 export default function Button({
   onClick,

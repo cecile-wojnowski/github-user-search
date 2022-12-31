@@ -36,7 +36,7 @@ export default function GithubSearch() {
     <>
       <Header content="Github search" />
       <Container>
-        {!isMobile ? <EditButton /> : null}
+        {!isMobile ? <EditButton /> : <></>}
         <SearchInput />
         {canEdit ? (
           <Box
@@ -45,15 +45,19 @@ export default function GithubSearch() {
             <SelectedElements />
             <Actions icons={actions} />
           </Box>
-        ) : null}
-        {hasNoResult ? <Typography content="No user found" /> : null}
-        <UsersList users={state.users} url={url} />
+        ) : (
+          <></>
+        )}
+        {hasNoResult ? <Typography content="No user found" /> : <></>}
+        <UsersList url={url} />
 
         {isMobile ? (
           <Box style={{ justifyContent: "center", marginTop: "20%" }}>
             <EditButton />
           </Box>
-        ) : null}
+        ) : (
+          <></>
+        )}
       </Container>
     </>
   );

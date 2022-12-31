@@ -24,7 +24,7 @@ export default function HeaderCard({ id, imageUrl }: HeaderCardProps) {
   };
   return (
     <Box>
-      {canEdit ? <Checkbox userId={id} /> : null}
+      {canEdit ? <Checkbox userId={id} /> : <></>}
       <Avatar imageUrl={imageUrl} style={style} />
     </Box>
   );

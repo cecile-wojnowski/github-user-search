@@ -1,5 +1,8 @@
 import React from "react";
 
+import theme from "styles/theme";
+import { BoxProps } from "./Box.types";
+
 /**
  * Used to wrap specific content with a defined style passed by the props
  *
@@ -7,15 +10,20 @@ import React from "react";
  * @param {string} justifyContent
  * @returns {JSX} Any content with a specific layout
  */
-export default function Box({ children, boxShadow, borderRadius, style }: any) {
+export default function Box({
+  children,
+  boxShadow,
+  borderRadius,
+  style,
+}: BoxProps) {
   return (
     <div
       data-testid="Box"
       style={{
         ...style,
         display: "flex",
-        boxShadow: boxShadow ? "3px 3px 5px grey" : "none", // TODO : must be stored inside a theme
-        borderRadius: borderRadius ? "8px" : "O",
+        boxShadow: boxShadow ? theme.boxShadow : "none", // TODO : must be stored inside a theme
+        borderRadius: borderRadius ? theme.borderRadius : "O",
       }}
     >
       {children}

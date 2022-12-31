@@ -8,6 +8,9 @@ const theme = {
     green: "green",
     red: "red",
   },
+  borderRadius: "8px",
+  boxShadow: "3px 3px 5px grey",
+  globalMargin: 30,
 };
 
 export default theme;

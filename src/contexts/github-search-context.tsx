@@ -4,6 +4,8 @@ import useMediaQuery from "hooks/useMediaQuery";
 
 export const GithubSearchContext = createContext("");
 
+type GithubSearchProviderProps = { children: JSX.Element | JSX.Element[] };
+
 const initialState = {
   selectedCards: 0,
   users: [],
@@ -73,7 +75,9 @@ function reducer(state: any, action: any) {
   }
 }
 
-export default function GithubSearchProvider({ children }: any) {
+export default function GithubSearchProvider({
+  children,
+}: GithubSearchProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [canEdit, setCanEdit] = useState(true);
   const [inputValue, setInputValue] = useState(null);

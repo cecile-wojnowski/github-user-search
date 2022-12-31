@@ -19,10 +19,13 @@ export default function TextCard({ content }: TextCardProps) {
         paddingBlock: "10%",
       }}
     >
-      {content.length > 0 &&
+      {content.length > 0 ? (
         content.map((info: string | number) => (
           <Typography key={info} content={info} style={textStyle} />
-        ))}
+        ))
+      ) : (
+        <></>
+      )}
     </Box>
   );
 }
