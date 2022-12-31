@@ -3,4 +3,5 @@ export type BoxProps = {
   boxShadow?: boolean;
   borderRadius?: boolean;
   style?: Object | React.CSSProperties;
+  dataTestid?: string;
 };

@@ -20,7 +20,7 @@ export default function IconButton({ icon, onClick }: IconButtonProps) {
   return (
     <>
       {iconFile ? (
-        <button onClick={onClick} style={style}>
+        <button onClick={onClick} style={style} name={icon}>
           <img src={iconFile} alt="icon" style={{ width: "40px" }} />
         </button>
       ) : (

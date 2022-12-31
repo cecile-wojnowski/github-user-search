@@ -17,7 +17,10 @@ export default function SelectedElements() {
 
   return (
     <Box style={style}>
-      <Checkbox onClick={() => dispatch({ type: "checkAll" })} />
+      <Checkbox
+        onClick={() => dispatch({ type: "checkAll" })}
+        dataTestid="CheckAll"
+      />
       <TextContent count={state.selectedCards} />
     </Box>
   );

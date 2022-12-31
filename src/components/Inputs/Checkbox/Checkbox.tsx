@@ -5,7 +5,11 @@ import { CheckboxProps } from "./Checkbox.types";
 
 import { GithubSearchContext } from "contexts/github-search-context";
 
-export default function Checkbox({ onClick, userId }: CheckboxProps) {
+export default function Checkbox({
+  onClick,
+  userId,
+  dataTestid,
+}: CheckboxProps) {
   const [checked, setChecked] = useState(false);
 
   // @ts-ignore
@@ -48,6 +52,7 @@ export default function Checkbox({ onClick, userId }: CheckboxProps) {
         type="checkbox"
         checked={checked}
         onChange={onClick ? onClick : handleChange}
+        data-testid={dataTestid ? dataTestid : "Checkbox"}
       />
     </div>
   );

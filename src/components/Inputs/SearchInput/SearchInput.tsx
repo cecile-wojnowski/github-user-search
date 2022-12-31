@@ -20,6 +20,7 @@ export default function SearchInput() {
         style={{ ...style, width: isMobile ? "100%" : "30%" }}
         type="text"
         placeholder="Search users"
+        name="search_input"
       />
     </Box>
   );

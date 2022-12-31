@@ -15,10 +15,11 @@ export default function Box({
   boxShadow,
   borderRadius,
   style,
+  dataTestid,
 }: BoxProps) {
   return (
     <div
-      data-testid="Box"
+      data-testid={dataTestid ? dataTestid : "Box"}
       style={{
         ...style,
         display: "flex",

@@ -22,7 +22,7 @@ export default function Card({ id, login, imageUrl, profileUrl }: CardProps) {
   const userInfos = [id, login];
 
   return (
-    <Box boxShadow borderRadius style={style}>
+    <Box boxShadow borderRadius style={style} dataTestid={`Card`}>
       <HeaderCard id={id} imageUrl={imageUrl} />
       <TextCard content={userInfos} />
       <Button onClick={handleClick} content="View profile" />
