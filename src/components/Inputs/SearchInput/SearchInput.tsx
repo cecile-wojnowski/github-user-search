@@ -5,9 +5,10 @@ import { GithubSearchContext } from "contexts/github-search-context";
 import style from "components/Inputs/SearchInput/style";
 import Box from "components/Containers/Box";
 
-export default function SearchInput({ inputValue, setInputValue }: any) {
+export default function SearchInput() {
   // @ts-ignore
-  const { isMobile } = useContext(GithubSearchContext);
+  const { isMobile, inputValue, setInputValue } =
+    useContext(GithubSearchContext);
   function handleChange(event: any) {
     setInputValue(event.target.value);
   }

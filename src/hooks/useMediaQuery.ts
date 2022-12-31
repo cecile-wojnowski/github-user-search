@@ -6,8 +6,8 @@ export default function useMediaQuery(screenSize: string) {
   useEffect(() => {
     const media = window.matchMedia(screenSize); // returns a MediaQueryList object
 
-    if (media.matches !== matches) {
-      setMatches(media.matches);
+    if (media?.matches !== matches) {
+      setMatches(media?.matches);
     }
 
     const listener = () => setMatches(media.matches);

@@ -20,7 +20,7 @@ export default function GithubSearch() {
   const [url, setUrl] = useState("");
 
   // @ts-ignore
-  const { isMobile, state, canEdit, dispatch, inputValue, setInputValue } =
+  const { isMobile, state, canEdit, dispatch, inputValue } =
     useContext(GithubSearchContext);
   const hasNoResult = isEmpty(state.users) && inputValue;
 
@@ -37,7 +37,7 @@ export default function GithubSearch() {
       <Header content="Github search" />
       <Container>
         {!isMobile ? <EditButton /> : null}
-        <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
+        <SearchInput />
         {canEdit ? (
           <Box
             style={{ flexDirection: "row", justifyContent: "space-between" }}
