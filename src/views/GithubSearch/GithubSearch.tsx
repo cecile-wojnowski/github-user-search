@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { GithubSearchContext } from "contexts/github-search-context";
-import useFetch from "hooks/useFetch";
-import hasLength from "functions/hasLength";
+
+import isEmpty from "functions/isEmpty";
 import { actions } from "constants/constants";
 import { routes } from "constants/routes";
 
@@ -23,19 +23,15 @@ export default function GithubSearch() {
   // @ts-ignore
   const { isMobile, state, canEdit, dispatch, inputValue, setInputValue } =
     useContext(GithubSearchContext);
-  const hasNoResult = !hasLength(state.users) && inputValue;
+  const hasNoResult = isEmpty(state.users) && inputValue;
 
   useEffect(() => {
     if (inputValue) {
       setUrl(
         `${routes.GITHUB_USERS_SEARCH}${inputValue}${routes.GITHUB_USERS_SEARCH_PARAMS}`
       );
-    } else if (inputValue === "") {
-      dispatch({ type: "reset" });
     }
   }, [inputValue, dispatch]);
-
-  const { isLoading, errorMessage } = useFetch(url, "GET");
 
   return (
     <>
@@ -51,16 +47,9 @@ export default function GithubSearch() {
             <Actions icons={actions} />
           </Box>
         ) : null}
+        {hasNoResult ? <Typography content="No user found" /> : null}
+        <UsersList users={state.users} url={url} />
 
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : errorMessage ? (
-          errorMessage
-        ) : hasNoResult ? (
-          <Typography content="No user found" />
-        ) : (
-          <UsersList users={state.users} />
-        )}
         {isMobile ? (
           <Box style={{ justifyContent: "center", marginTop: "20%" }}>
             <EditButton />

@@ -47,13 +47,12 @@ function reducer(state: any, action: any) {
 
     case "delete":
       // Delete one or more specified users
-      const removedUsers = state.users?.filter(
+      const uncheckedUsers = state.users.filter(
         (user: any) => !state.usersChecked.includes(user.id)
       );
 
       return {
-        ...state,
-        users: removedUsers,
+        users: uncheckedUsers,
         usersChecked: [],
         selectedCards: 0,
         allChecked: false,
@@ -68,11 +67,6 @@ function reducer(state: any, action: any) {
         allChecked: !state.allChecked,
         usersChecked: !state.allChecked ? usersId : [],
       };
-
-    case "reset": {
-      // Used when the search input is empty
-      return { ...initialState };
-    }
 
     default:
       throw new Error();

@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 
 import "./style.css";
+import { CheckboxProps } from "./Checkbox.types";
 
 import { GithubSearchContext } from "contexts/github-search-context";
 
-export default function Checkbox({ onClick, userId }: any) {
+export default function Checkbox({ onClick, userId }: CheckboxProps) {
   const [checked, setChecked] = useState(false);
 
   // @ts-ignore
@@ -21,12 +22,16 @@ export default function Checkbox({ onClick, userId }: any) {
         type: "removeChecked",
         payload: userId,
       });
-    } else if (!state.usersChecked.includes(userId)) {
-      setChecked(false);
     }
 
     setChecked(!checked);
   };
+
+  useEffect(() => {
+    if (!state.usersChecked.includes(userId)) {
+      setChecked(false);
+    }
+  }, [state.usersChecked, userId]);
 
   useEffect(() => {
     if (state.allChecked) {
