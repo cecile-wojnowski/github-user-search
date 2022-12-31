@@ -14,11 +14,16 @@ export default function IconButton({ icon, onClick }: IconButtonProps) {
       break;
     default:
       console.log("Icon not found");
+      break;
   }
 
   return (
-    <button onClick={onClick} style={style}>
-      <img src={iconFile} alt="icon" style={{ width: "40px" }} />
-    </button>
+    <>
+      {iconFile ? (
+        <button onClick={onClick} style={style}>
+          <img src={iconFile} alt="icon" style={{ width: "40px" }} />
+        </button>
+      ) : null}
+    </>
   );
 }

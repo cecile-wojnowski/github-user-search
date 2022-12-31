@@ -1,11 +1,9 @@
 import React from "react";
 
+import { TextCardProps } from "./Card.types";
+
 import Box from "components/Containers/Box";
 import Typography from "components/Typography";
-
-type TextCardProps = {
-  content: any[];
-};
 
 export default function TextCard({ content }: TextCardProps) {
   const textStyle = {
@@ -22,7 +20,7 @@ export default function TextCard({ content }: TextCardProps) {
       }}
     >
       {content.length > 0 &&
-        content.map((info: string) => (
+        content.map((info: string | number) => (
           <Typography key={info} content={info} style={textStyle} />
         ))}
     </Box>

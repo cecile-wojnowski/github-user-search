@@ -1,4 +1,4 @@
 export type CheckboxProps = {
   onClick?: () => void;
-  userId?: string;
+  userId?: string | number;
 };

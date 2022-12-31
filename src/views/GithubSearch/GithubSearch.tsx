@@ -14,7 +14,6 @@ import SelectedElements from "views/GithubSearch/SelectedElements/SelectedElemen
 import SearchInput from "components/Inputs/SearchInput";
 import EditButton from "views/GithubSearch/EditButton";
 import Typography from "components/Typography";
-
 import Actions from "components/Actions";
 
 export default function GithubSearch() {

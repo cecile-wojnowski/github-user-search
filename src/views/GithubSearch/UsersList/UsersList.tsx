@@ -29,7 +29,13 @@ export default function UsersList({ users, url }: any) {
         >
           {!isEmpty(users) // Make sure to not map on an empty array
             ? users.map((user: any, index: number) => (
-                <Card key={index} user={user} />
+                <Card
+                  key={user.id}
+                  id={user.id}
+                  login={user.login}
+                  imageUrl={user.avatar_url}
+                  profileUrl={user.html_url}
+                />
               ))
             : null}
         </Box>

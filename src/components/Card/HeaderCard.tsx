@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import { GithubSearchContext } from "contexts/github-search-context";
+import { HeaderCardProps } from "./Card.types";
 
 import Box from "components/Containers/Box";
 import Avatar from "components/Avatar";
@@ -12,7 +13,7 @@ import Checkbox from "components/Inputs/Checkbox";
  * @returns {JSX} Checkbox visible in edit mode and avatar
  */
 
-export default function HeaderCard({ user }: any) {
+export default function HeaderCard({ id, imageUrl }: HeaderCardProps) {
   // @ts-ignore
   const { canEdit } = useContext(GithubSearchContext);
 
@@ -23,8 +24,8 @@ export default function HeaderCard({ user }: any) {
   };
   return (
     <Box>
-      {canEdit ? <Checkbox userId={user.id} /> : null}
-      <Avatar imageUrl={user?.avatar_url} style={style} />
+      {canEdit ? <Checkbox userId={id} /> : null}
+      <Avatar imageUrl={imageUrl} style={style} />
     </Box>
   );
 }
