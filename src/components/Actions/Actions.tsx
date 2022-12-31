@@ -14,9 +14,9 @@ export default function Actions({ icons }: ActionsProps) {
 
   return (
     <Box>
-      {icons?.map((icon: string, index: number) => (
+      {icons?.map((icon: string) => (
         <IconButton
-          key={index}
+          key={icon}
           onClick={() => {
             if (icon === "delete") setInputValue("");
             dispatch({ type: icon });

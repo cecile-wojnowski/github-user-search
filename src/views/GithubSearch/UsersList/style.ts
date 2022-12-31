@@ -1,12 +1,11 @@
 const style = {
   maxWidth: "100%",
-  height: "320px",
+  height: "50vh",
   overflowY: "auto",
   overflowX: "clip",
   flexWrap: "wrap",
-  justifyContent: "space-evenly",
-  gap: "5%",
-  paddingInline: "1%",
+  gap: "3%",
+  paddingInline: "3%",
 };
 
 export default style;

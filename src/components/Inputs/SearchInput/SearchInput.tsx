@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import { GithubSearchContext } from "contexts/github-search-context";
 
 import style from "components/Inputs/SearchInput/style";
 import Box from "components/Containers/Box";
 
 export default function SearchInput({ inputValue, setInputValue }: any) {
+  // @ts-ignore
+  const { isMobile } = useContext(GithubSearchContext);
   function handleChange(event: any) {
     setInputValue(event.target.value);
   }
@@ -12,7 +16,7 @@ export default function SearchInput({ inputValue, setInputValue }: any) {
       <input
         value={inputValue ? inputValue : ""}
         onChange={handleChange}
-        style={style}
+        style={{ ...style, width: isMobile ? "100%" : "30%" }}
         type="text"
         placeholder="Search users"
       />

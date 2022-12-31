@@ -21,7 +21,7 @@ export default function GithubSearch() {
   const [url, setUrl] = useState("");
 
   // @ts-ignore
-  const { state, canEdit, dispatch, inputValue, setInputValue } =
+  const { isMobile, state, canEdit, dispatch, inputValue, setInputValue } =
     useContext(GithubSearchContext);
   const hasNoResult = !hasLength(state.users) && inputValue;
 
@@ -41,13 +41,14 @@ export default function GithubSearch() {
     <>
       <Header content="Github search" />
       <Container>
-        <EditButton />
+        {!isMobile ? <EditButton /> : null}
         <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
         {canEdit ? (
           <Box
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <SelectedElements /> <Actions icons={actions} />
+            <SelectedElements />
+            <Actions icons={actions} />
           </Box>
         ) : null}
 
@@ -60,6 +61,11 @@ export default function GithubSearch() {
         ) : (
           <UsersList users={state.users} />
         )}
+        {isMobile ? (
+          <Box style={{ justifyContent: "center", marginTop: "20%" }}>
+            <EditButton />
+          </Box>
+        ) : null}
       </Container>
     </>
   );

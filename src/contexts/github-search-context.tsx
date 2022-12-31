@@ -1,4 +1,6 @@
-import React, { createContext, useState, useReducer } from "react";
+import React, { createContext, useState, useReducer, useEffect } from "react";
+
+import useMediaQuery from "hooks/useMediaQuery";
 
 export const GithubSearchContext = createContext("");
 
@@ -81,6 +83,13 @@ export default function GithubSearchProvider({ children }: any) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [canEdit, setCanEdit] = useState(true);
   const [inputValue, setInputValue] = useState(null);
+  const [isMobile, setIsMobile] = useState(true); // Used to render differents styles depending on the screen's size
+
+  const isMobileWidth = useMediaQuery("(max-width: 600px)");
+
+  useEffect(() => {
+    setIsMobile(isMobileWidth);
+  }, [isMobileWidth]);
 
   return (
     <GithubSearchContext.Provider
@@ -92,6 +101,7 @@ export default function GithubSearchProvider({ children }: any) {
         setCanEdit,
         inputValue,
         setInputValue,
+        isMobile,
       }}
     >
       {children}

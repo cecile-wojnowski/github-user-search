@@ -1,22 +1,24 @@
 import React from "react";
 
-export default function IconButton({ icon, onClick }: any) {
-  const deleteIcon = require("assets/icons/delete.svg").default;
-  const duplicateIcon = require("assets/icons/duplicate.svg").default;
+import { IconButtonProps } from "components/Buttons/IconButton/IconButton.types";
+import style from "components/Buttons/IconButton/style";
 
-  // TODO : must be improved
+export default function IconButton({ icon, onClick }: IconButtonProps) {
+  let iconFile = "";
+  switch (icon) {
+    case "delete":
+      iconFile = require("assets/icons/delete.svg").default;
+      break;
+    case "duplicate":
+      iconFile = require("assets/icons/duplicate.svg").default;
+      break;
+    default:
+      console.log("Icon not found");
+  }
+
   return (
-    <>
-      <button
-        onClick={onClick}
-        style={{ border: "none", backgroundColor: "white" }}
-      >
-        <img
-          src={icon === "delete" ? deleteIcon : duplicateIcon}
-          alt="icon"
-          style={{ width: "40px" }}
-        />
-      </button>
-    </>
+    <button onClick={onClick} style={style}>
+      <img src={iconFile} alt="icon" style={{ width: "40px" }} />
+    </button>
   );
 }
