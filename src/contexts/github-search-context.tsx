@@ -39,7 +39,8 @@ function reducer(state: any, action: any) {
     case "duplicate":
       const duplicatedUsers = state.usersChecked?.map((element: any) => {
         const user = state?.users.filter((user: any) => element === user.id);
-        return user[0];
+        const duplicatedUser = { ...user[0], duplicatedId: user[0].id + 1 };
+        return duplicatedUser;
       });
 
       return {
@@ -49,9 +50,15 @@ function reducer(state: any, action: any) {
 
     case "delete":
       // Delete one or more specified users
-      const uncheckedUsers = state.users.filter(
-        (user: any) => !state.usersChecked.includes(user.id)
-      );
+      const uncheckedUsers = state.users.filter((user: any) => {
+        let isUnchecked;
+        if (user.hasOwnProperty("duplicatedId")) {
+          isUnchecked = !state.usersChecked.includes(user.duplicatedId);
+        } else {
+          isUnchecked = !state.usersChecked.includes(user.id);
+        }
+        return isUnchecked;
+      });
 
       return {
         users: uncheckedUsers,
