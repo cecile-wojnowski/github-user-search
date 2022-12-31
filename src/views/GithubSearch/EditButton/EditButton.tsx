@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 
+import theme from "styles/theme";
+import style from "./style";
 import { GithubSearchContext } from "contexts/github-search-context";
 
 import Button from "components/Buttons/Button";
@@ -11,15 +13,13 @@ import Button from "components/Buttons/Button";
 export default function EditButton() {
   // @ts-ignore
   const { canEdit, setCanEdit } = useContext(GithubSearchContext);
-  const style = {
-    backgroundColor: "lightgrey",
-    borderRadius: "8px",
-    borderColor: !canEdit ? "green" : "red",
-    cursor: "pointer",
-  };
+
   return (
     <Button
-      style={style}
+      style={{
+        ...style,
+        borderColor: !canEdit ? theme.colors.green : theme.colors.red,
+      }}
       onClick={() => setCanEdit(!canEdit)}
       content={!canEdit ? "Enable edit mode" : "Disable edit mode"}
     />

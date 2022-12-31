@@ -1,5 +1,7 @@
+import theme from "styles/theme";
+
 const style = {
-  backgroundColor: "lightgrey",
+  backgroundColor: theme.colors.lightgrey,
   border: "none",
   borderRadius: "8px",
   height: "2.5rem",

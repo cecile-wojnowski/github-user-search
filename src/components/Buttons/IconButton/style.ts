@@ -1,6 +1,8 @@
+import theme from "styles/theme";
+
 const style = {
   border: "none",
-  backgroundColor: "white",
+  backgroundColor: theme.colors.white,
   cursor: "pointer",
 };
 

@@ -1,11 +1,12 @@
 import React from "react";
 import Typography from "components/Typography";
 
+import theme from "styles/theme";
 import { ButtonProps } from "./Button.type";
 
 // TODO : use theme
 const defaultStyle = {
-  backgroundColor: "#13b0f5",
+  backgroundColor: theme.colors.lightblue,
   borderRadius: "8px",
   border: "none",
   cursor: "pointer",
