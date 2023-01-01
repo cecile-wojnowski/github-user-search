@@ -32,18 +32,18 @@ export default function Checkbox({
   };
 
   useEffect(() => {
-    if (!state.usersChecked.includes(userId)) {
+    if (!state?.usersChecked.includes(userId)) {
       setChecked(false);
     }
-  }, [state.usersChecked, userId]);
+  }, [state?.usersChecked, userId]);
 
   useEffect(() => {
-    if (state.allChecked) {
+    if (state?.allChecked) {
       setChecked(true);
-    } else if (state.allChecked === false) {
+    } else if (state?.allChecked === false) {
       setChecked(false);
     }
-  }, [state.allChecked]);
+  }, [state?.allChecked]);
 
   return (
     <div className="checkbox-wrapper">

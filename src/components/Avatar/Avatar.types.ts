@@ -1,4 +1,4 @@
 export type AvatarProps = {
   imageUrl?: string;
-  style: Object;
+  style?: Object;
 };

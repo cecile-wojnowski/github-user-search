@@ -2,6 +2,8 @@ import React from "react";
 import { render, screen, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import "utils/matchMedia-mock";
+
 import GithubSearchProvider from "contexts/github-search-context";
 import Checkbox from "components/Inputs/Checkbox";
 

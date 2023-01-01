@@ -10,7 +10,7 @@ describe("Testing <Box/> component", () => {
   it("Should render children components and apply specified CSS", () => {
     const content = "test";
     render(
-      <Box width="200px">
+      <Box style={{ width: "200px" }}>
         <Typography content={content} />
       </Box>
     );
