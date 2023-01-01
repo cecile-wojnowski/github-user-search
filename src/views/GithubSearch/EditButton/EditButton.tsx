@@ -22,6 +22,7 @@ export default function EditButton() {
       }}
       onClick={() => setCanEdit(!canEdit)}
       content={!canEdit ? "Enable edit mode" : "Disable edit mode"}
+      dataTestid="EditMode"
     />
   );
 }

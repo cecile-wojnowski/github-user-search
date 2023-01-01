@@ -14,7 +14,14 @@ import Button from "components/Buttons/Button";
  * @returns {JSX}
  */
 
-export default function Card({ id, login, imageUrl, profileUrl }: CardProps) {
+export default function Card({
+  id,
+  login,
+  imageUrl,
+  profileUrl,
+  duplicatedId,
+  dataTestid,
+}: CardProps) {
   function handleClick() {
     window.location.href = profileUrl;
   }
@@ -22,8 +29,13 @@ export default function Card({ id, login, imageUrl, profileUrl }: CardProps) {
   const userInfos = [id, login];
 
   return (
-    <Box boxShadow borderRadius style={style} dataTestid={`Card`}>
-      <HeaderCard id={id} imageUrl={imageUrl} />
+    <Box boxShadow borderRadius style={style} dataTestid={dataTestid}>
+      <HeaderCard
+        id={id}
+        imageUrl={imageUrl}
+        dataTestid={`Checkbox_${dataTestid}`}
+        duplicatedId={duplicatedId}
+      />
       <TextCard content={userInfos} />
       <Button onClick={handleClick} content="View profile" />
     </Box>

@@ -38,8 +38,19 @@ function reducer(state: any, action: any) {
 
     case "duplicate":
       const duplicatedUsers = state.usersChecked?.map((element: any) => {
-        const user = state?.users.filter((user: any) => element === user.id);
-        const duplicatedUser = { ...user[0], duplicatedId: user[0].id + 1 };
+        const user = state?.users.filter(
+          (user: any) => element === user.id || element === user?.duplicatedId
+        );
+        let duplicatedUser = {};
+        if (user[0]?.hasOwnProperty("duplicatedId")) {
+          duplicatedUser = {
+            ...user[0],
+            duplicatedId: user[0]?.duplicatedId + 1,
+          };
+        } else {
+          duplicatedUser = { ...user[0], duplicatedId: user[0]?.id + 1 };
+        }
+
         return duplicatedUser;
       });
 

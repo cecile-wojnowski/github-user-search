@@ -27,20 +27,27 @@ export default function UsersList({ url }: UsersListProps) {
       {errorMessage ? errorMessage : <></>}
       {isLoading ? (
         <p>Loading...</p>
-      ) : hasNoResult ? (
+      ) : !errorMessage && hasNoResult ? (
         <Typography content="No user found" />
       ) : (
         <Box
           style={{ ...style, justifyContent: isMobile ? "center" : "start" }}
+          dataTestid="UsersList"
         >
           {!isEmpty(state.users) ? ( // Make sure to not map on an empty array
-            state.users.map((user: any) => (
+            state.users.map((user: any, index: number) => (
               <Card
-                key={user?.duplicatedId ? user?.duplicatedId : user.id}
-                id={user?.duplicatedId ? user?.duplicatedId : user.id}
+                key={
+                  user.hasOwnProperty("duplicatedId")
+                    ? user?.duplicatedId
+                    : user.id
+                }
+                id={user.id}
+                duplicatedId={user?.duplicatedId}
                 login={user.login}
                 imageUrl={user.avatar_url}
                 profileUrl={user.html_url}
+                dataTestid={`Card${index + 1}`}
               />
             ))
           ) : (

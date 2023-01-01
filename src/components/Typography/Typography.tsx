@@ -8,6 +8,14 @@ import { TypographyProps } from "components/Typography/Typography.types";
  * @param {Object} style
  * @returns {JSX}
  */
-export default function Typography({ content, style }: TypographyProps) {
-  return <p style={{ ...style }}>{content}</p>;
+export default function Typography({
+  content,
+  style,
+  dataTestid,
+}: TypographyProps) {
+  return (
+    <p data-testid={dataTestid ? dataTestid : "Text"} style={{ ...style }}>
+      {content}
+    </p>
+  );
 }

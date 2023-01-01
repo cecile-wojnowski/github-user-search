@@ -20,8 +20,13 @@ export default function TextCard({ content }: TextCardProps) {
       }}
     >
       {content.length > 0 ? (
-        content.map((info: string | number) => (
-          <Typography key={info} content={info} style={textStyle} />
+        content.map((info: string | number, index: number) => (
+          <Typography
+            key={info}
+            content={info}
+            style={textStyle}
+            dataTestid={`InfosUser${index + 1}`}
+          />
         ))
       ) : (
         <></>

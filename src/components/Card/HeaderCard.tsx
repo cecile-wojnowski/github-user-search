@@ -13,7 +13,12 @@ import Checkbox from "components/Inputs/Checkbox";
  * @returns {JSX} Checkbox visible in edit mode and avatar
  */
 
-export default function HeaderCard({ id, imageUrl }: HeaderCardProps) {
+export default function HeaderCard({
+  id,
+  imageUrl,
+  duplicatedId,
+  dataTestid,
+}: HeaderCardProps) {
   // @ts-ignore
   const { canEdit } = useContext(GithubSearchContext);
 
@@ -24,7 +29,14 @@ export default function HeaderCard({ id, imageUrl }: HeaderCardProps) {
   };
   return (
     <Box>
-      {canEdit ? <Checkbox userId={id} /> : <></>}
+      {canEdit ? (
+        <Checkbox
+          userId={duplicatedId ? duplicatedId : id}
+          dataTestid={dataTestid}
+        />
+      ) : (
+        <></>
+      )}
       <Avatar imageUrl={imageUrl} style={style} />
     </Box>
   );

@@ -8,9 +8,10 @@ export default function Button({
   onClick,
   content,
   style = defaultStyle,
+  dataTestid,
 }: ButtonProps) {
   return (
-    <button onClick={onClick} style={{ ...style }}>
+    <button onClick={onClick} style={{ ...style }} data-testid={dataTestid}>
       <Typography content={content} style={{ fontWeight: 550 }} />
     </button>
   );

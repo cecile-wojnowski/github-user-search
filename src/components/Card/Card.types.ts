@@ -3,11 +3,15 @@ export type CardProps = {
   login: string;
   imageUrl: string;
   profileUrl: string;
+  duplicatedId?: number;
+  dataTestid: string;
 };
 
 export type HeaderCardProps = {
   id: number;
   imageUrl: string;
+  duplicatedId?: number;
+  dataTestid: string;
 };
 
 export type TextCardProps = {
