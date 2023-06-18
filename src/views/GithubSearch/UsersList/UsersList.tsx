@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import { GithubSearchContext } from "contexts/github-search-context";
 import { UsersListProps } from "./UsersList.types";
@@ -9,18 +9,26 @@ import style from "views/GithubSearch/UsersList/style";
 import Box from "components/Containers/Box";
 import Card from "components/Card";
 import Typography from "components/Typography";
+import {
+  GithubSearchContextType,
+  User,
+} from "contexts/github-search-context.types";
 
 /**
  * A scrollable container with the list of cards users
- * @param {Object} users Array of users with their infos
- * @returns
+ * @param url updated with the input value after a delay to avoid successive requests
+ * @returns a list of cards
  */
+
 export default function UsersList({ url }: UsersListProps) {
-  // @ts-ignore
-  const { isMobile, state, inputValue } = useContext(GithubSearchContext);
+  const { isMobile, state, inputValue } = useContext(
+    GithubSearchContext
+  ) as GithubSearchContextType;
+  const { users } = state;
   const { isLoading, errorMessage } = useFetch(url, "GET");
 
-  const hasNoResult = inputValue && isEmpty(state.users);
+  const hasNoResult = inputValue && isEmpty(users);
+  // TODO : fix => since we are using a delay, hasNoResult needs to be true AFTER the query is done
 
   return (
     <>
@@ -34,14 +42,10 @@ export default function UsersList({ url }: UsersListProps) {
           style={{ ...style, justifyContent: isMobile ? "center" : "start" }}
           dataTestid="UsersList"
         >
-          {!isEmpty(state.users) ? ( // Make sure to not map on an empty array
-            state.users.map((user: any, index: number) => (
+          {!isEmpty(users) ? ( // Make sure to not map on an empty array
+            users.map((user: User, index: number) => (
               <Card
-                key={
-                  user.hasOwnProperty("duplicatedId")
-                    ? user?.duplicatedId
-                    : user.id
-                }
+                key={"duplicatedId" in user ? user?.duplicatedId : user.id}
                 id={user.id}
                 duplicatedId={user?.duplicatedId}
                 login={user.login}

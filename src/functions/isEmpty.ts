@@ -3,6 +3,6 @@
  * @param array
  * @returns Returns a boolean
  */
-export default function isEmpty(array: any[]) {
+export default function isEmpty(array: any[] | undefined) {
   return array?.length === 0 || array === undefined ? true : false;
 }

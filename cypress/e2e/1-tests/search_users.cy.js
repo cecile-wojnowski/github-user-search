@@ -1,19 +1,22 @@
 /// <reference types="cypress" />
 
 describe("Test Github user search", () => {
+  // could be improved
   beforeEach(() => {
     // it runs before each test
     cy.visit("http://localhost:3000");
   });
 
   it("displays users cards when there is any user input", () => {
-    cy.get('input[name="search_input"]').type("t").should("have.value", "t");
+    cy.get('input[name="search_input"]')
+      .type("test")
+      .should("have.value", "test");
 
     cy.get("[data-testid=Card1]").should("be.visible");
   });
 
   it("check cards", () => {
-    cy.get('input[name="search_input"]').type("t");
+    cy.get('input[name="search_input"]').type("test");
 
     cy.get("[data-testid=CheckAll]").click().should("be.checked");
     cy.get("[data-testid=Checkbox_Card1]").should("be.checked");
@@ -60,7 +63,7 @@ describe("Test Github user search", () => {
   });
 
   it("disable the edit mode", () => {
-    cy.get('input[name="search_input"]').type("t");
+    cy.get('input[name="search_input"]').type("test");
 
     cy.get("[data-testid=CheckAll]").should("exist");
     cy.get("[data-testid=Checkbox_Card1]").should("exist");

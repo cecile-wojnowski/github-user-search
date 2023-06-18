@@ -1,10 +1,18 @@
 import React, { createContext, useState, useReducer, useEffect } from "react";
+import {
+  GithubSearchContextType,
+  GithubSearchProviderProps,
+  UsersListState,
+  User,
+  InputValue,
+} from "./github-search-context.types";
 
 import useMediaQuery from "hooks/useMediaQuery";
+import { duplicateUsers } from "functions/duplicateUsers";
 
-export const GithubSearchContext = createContext("");
-
-type GithubSearchProviderProps = { children: JSX.Element | JSX.Element[] };
+export const GithubSearchContext = createContext<
+  GithubSearchContextType | string
+>("");
 
 const initialState = {
   selectedCards: 0,
@@ -13,7 +21,8 @@ const initialState = {
   allChecked: null,
 };
 
-function reducer(state: any, action: any) {
+function reducer(state: UsersListState, action: any) {
+  const { users, usersChecked, selectedCards, allChecked } = state;
   switch (action.type) {
     case "add":
       // Used to store the fetched data
@@ -22,51 +31,36 @@ function reducer(state: any, action: any) {
     case "addChecked":
       return {
         ...state,
-        selectedCards: state.selectedCards + 1,
-        usersChecked: [...state.usersChecked, action.payload],
+        selectedCards: selectedCards + 1,
+        usersChecked: [...usersChecked, action.payload],
       };
 
     case "removeChecked":
-      const removedChecked = state.usersChecked.filter(
+      const removedChecked = usersChecked.filter(
         (id: number) => id !== action.payload
       );
       return {
         ...state,
         usersChecked: removedChecked,
-        selectedCards: state.selectedCards - 1,
+        selectedCards: selectedCards - 1,
       };
 
     case "duplicate":
-      const duplicatedUsers = state.usersChecked?.map((element: any) => {
-        const user = state?.users.filter(
-          (user: any) => element === user.id || element === user?.duplicatedId
-        );
-        let duplicatedUser = {};
-        if (user[0]?.hasOwnProperty("duplicatedId")) {
-          duplicatedUser = {
-            ...user[0],
-            duplicatedId: user[0]?.duplicatedId + 1,
-          };
-        } else {
-          duplicatedUser = { ...user[0], duplicatedId: user[0]?.id + 1 };
-        }
-
-        return duplicatedUser;
-      });
+      const duplicatedUsers = duplicateUsers(users, usersChecked);
 
       return {
         ...state,
-        users: [...state.users, ...duplicatedUsers],
+        users: [...users, ...duplicatedUsers],
       };
 
     case "delete":
       // Delete one or more specified users
-      const uncheckedUsers = state.users.filter((user: any) => {
+      const uncheckedUsers = users.filter((user: User) => {
         let isUnchecked;
-        if (user.hasOwnProperty("duplicatedId")) {
-          isUnchecked = !state.usersChecked.includes(user.duplicatedId);
+        if ("duplicatedId" in user && user.duplicatedId) {
+          isUnchecked = !usersChecked.includes(user.duplicatedId);
         } else {
-          isUnchecked = !state.usersChecked.includes(user.id);
+          isUnchecked = !usersChecked.includes(user.id);
         }
         return isUnchecked;
       });
@@ -79,13 +73,13 @@ function reducer(state: any, action: any) {
       };
 
     case "checkAll":
-      const usersId = state.users.map((user: any) => user.id);
+      const usersId = users.map((user: User) => user.id);
 
       return {
         ...state,
-        selectedCards: !state.allChecked ? state.users.length : 0,
-        allChecked: !state.allChecked,
-        usersChecked: !state.allChecked ? usersId : [],
+        selectedCards: !allChecked ? users.length : 0,
+        allChecked: !allChecked,
+        usersChecked: !allChecked ? usersId : [],
       };
 
     default:
@@ -98,7 +92,7 @@ export default function GithubSearchProvider({
 }: GithubSearchProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [canEdit, setCanEdit] = useState(true);
-  const [inputValue, setInputValue] = useState(null);
+  const [inputValue, setInputValue] = useState<InputValue>(null);
   const [isMobile, setIsMobile] = useState(true); // Used to render differents styles depending on the screen's size
 
   const isMobileWidth = useMediaQuery("(max-width: 600px)");
@@ -109,7 +103,6 @@ export default function GithubSearchProvider({
 
   return (
     <GithubSearchContext.Provider
-      // @ts-ignore
       value={{
         state,
         dispatch,

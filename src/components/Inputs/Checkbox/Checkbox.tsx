@@ -4,6 +4,7 @@ import "./style.css";
 import { CheckboxProps } from "./Checkbox.types";
 
 import { GithubSearchContext } from "contexts/github-search-context";
+import { GithubSearchContextType } from "contexts/github-search-context.types";
 
 export default function Checkbox({
   onClick,
@@ -12,8 +13,9 @@ export default function Checkbox({
 }: CheckboxProps) {
   const [checked, setChecked] = useState(false);
 
-  // @ts-ignore
-  const { state, dispatch } = useContext(GithubSearchContext);
+  const { state, dispatch } = useContext(
+    GithubSearchContext
+  ) as GithubSearchContextType;
 
   const handleChange = () => {
     if (!checked) {
@@ -32,7 +34,7 @@ export default function Checkbox({
   };
 
   useEffect(() => {
-    if (!state?.usersChecked.includes(userId)) {
+    if (userId !== undefined && !state?.usersChecked.includes(userId)) {
       setChecked(false);
     }
   }, [state?.usersChecked, userId]);

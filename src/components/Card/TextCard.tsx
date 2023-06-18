@@ -1,6 +1,7 @@
 import React from "react";
 
 import { TextCardProps } from "./Card.types";
+import isEmpty from "functions/isEmpty";
 
 import Box from "components/Containers/Box";
 import Typography from "components/Typography";
@@ -19,7 +20,7 @@ export default function TextCard({ content }: TextCardProps) {
         paddingBlock: "10%",
       }}
     >
-      {content.length > 0 ? (
+      {!isEmpty(content) ? (
         content.map((info: string | number, index: number) => (
           <Typography
             key={info}

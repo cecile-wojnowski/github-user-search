@@ -6,6 +6,7 @@ import { HeaderCardProps } from "./Card.types";
 import Box from "components/Containers/Box";
 import Avatar from "components/Avatar";
 import Checkbox from "components/Inputs/Checkbox";
+import { GithubSearchContextType } from "contexts/github-search-context.types";
 
 /**
  *
@@ -19,8 +20,9 @@ export default function HeaderCard({
   duplicatedId,
   dataTestid,
 }: HeaderCardProps) {
-  // @ts-ignore
-  const { canEdit } = useContext(GithubSearchContext);
+  const { canEdit } = useContext(
+    GithubSearchContext
+  ) as GithubSearchContextType;
 
   const style = {
     width: "35%",
@@ -29,7 +31,7 @@ export default function HeaderCard({
   };
   return (
     <Box>
-      {canEdit ? (
+      {canEdit ? ( // a ternary here avoid to throw an error is there is an undefined value
         <Checkbox
           userId={duplicatedId ? duplicatedId : id}
           dataTestid={dataTestid}
